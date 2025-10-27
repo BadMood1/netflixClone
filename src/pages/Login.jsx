@@ -1,9 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import { signUp, login, logout } from "../firebase";
 
 export default function Login() {
     const [isNewUser, setIsNewUser] = useState(true);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const user_auth = async (e) => {
+        e.preventDefault();
+        if (isNewUser) {
+            await signUp(name, email, password);
+        } else {
+            await login(email, password);
+        }
+    };
 
     return (
         <div className="h-screen bg-[url('./assets/background_banner.jpg')]">
@@ -16,12 +29,30 @@ export default function Login() {
                         className="[&_input]:w-full [&_input]:p-[16px_20px] [&_input]:m-[12px_0] [&_input]:rounded-sm
                         [&_input]:bg-[#333] [&_input]:text-white [&_input]:outline-none"
                     >
-                        {isNewUser && <input type="text" placeholder="Your Name..." />}
-                        <input type="text" placeholder="Your E-Mail..." />
-                        <input type="password" placeholder="Your Password..." />
+                        {isNewUser && (
+                            <input
+                                type="text"
+                                placeholder="Your Name..."
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        )}
+                        <input
+                            type="text"
+                            placeholder="Your E-Mail..."
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            placeholder="Your Password..."
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                         <button
                             className="w-full bg-[#e50914] p-4 mt-6 rounded-sm font-semibold cursor-pointer
                         "
+                            onClick={user_auth}
                         >
                             {isNewUser ? "Sign Up" : "Sign In"}
                         </button>

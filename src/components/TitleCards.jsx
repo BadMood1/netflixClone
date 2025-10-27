@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function TitleCards({ title, category = "popular" }) {
     const [apiData, setApiData] = useState([]);
@@ -19,7 +20,6 @@ export default function TitleCards({ title, category = "popular" }) {
             .then((res) => res.json())
             .then((res) => {
                 setApiData(res.results);
-                console.log(res.results);
             })
             .catch((err) => console.error(err));
     }, [category]);
@@ -45,7 +45,11 @@ export default function TitleCards({ title, category = "popular" }) {
             <h2 className="mb-2 text-2xl">{title ? title : "Popular on Netflix"}</h2>
             <div className="flex gap-2.5 overflow-x-scroll [&::-webkit-scrollbar]:hidden " ref={cardsRef}>
                 {apiData.map((card, index) => (
-                    <div key={index} className="shrink-0 relative">
+                    <Link
+                        to={`/player/${card.id}`}
+                        key={index}
+                        className="shrink-0 relative cursor-pointer transition-transform hover:scale-105 duration-200"
+                    >
                         <img
                             src={
                                 card.backdrop_path
@@ -53,10 +57,10 @@ export default function TitleCards({ title, category = "popular" }) {
                                     : ""
                             }
                             alt={card.original_title}
-                            className="w-60 rounded-sm cursor-pointer"
+                            className="w-60 rounded-sm"
                         />
-                        <p className="absolute bottom-2.5 right-2.5">{card.original_title}</p>
-                    </div>
+                        <p className="absolute bottom-2.5 right-2.5 ">{card.original_title}</p>
+                    </Link>
                 ))}
             </div>
         </div>
