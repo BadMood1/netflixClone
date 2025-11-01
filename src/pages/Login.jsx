@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import { signUp, login, logout } from "../firebase";
+import { signUp, login } from "../firebase";
 
 export default function Login() {
-    const [isNewUser, setIsNewUser] = useState(true);
+    const [isNewUser, setIsNewUser] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

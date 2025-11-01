@@ -4,6 +4,7 @@ import searchIcon from "../assets/search_icon.svg";
 import bellIcon from "../assets/bell_icon.svg";
 import profileImg from "../assets/profile_img.png";
 import caretIcon from "../assets/caret_icon.svg";
+import { logout } from "../firebase";
 
 export default function Navbar() {
     const navRef = useRef();
@@ -48,7 +49,9 @@ export default function Navbar() {
                         className="hidden absolute group-hover:block top-full right-0 w-max bg-[#191919] p-[18px_22px] 
                         rounded-xs underline z-1"
                     >
-                        <p className="text-sm cursor-pointer">Sign Out of Netflix</p>
+                        <p className="text-sm cursor-pointer" onClick={() => logout()}>
+                            Sign Out of Netflix
+                        </p>
                     </div>
                 </div>
             </div>
