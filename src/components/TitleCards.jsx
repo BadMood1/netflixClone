@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function TitleCards({ title, category = "popular" }) {
+export default function TitleCards({ title, category = "popular", ...props }) {
     const [apiData, setApiData] = useState([]);
     // Ссылка на элемент который будет прокручиваться
     const cardsRef = useRef();
@@ -41,14 +41,18 @@ export default function TitleCards({ title, category = "popular" }) {
     }, []);
 
     return (
-        <div className="mb-8">
-            <h2 className="mb-2 text-2xl">{title ? title : "Popular on Netflix"}</h2>
-            <div className="flex gap-2.5 overflow-x-scroll [&::-webkit-scrollbar]:hidden " ref={cardsRef}>
+        <div className="mb-8" {...props}>
+            <h2 className="mb-2 sm:text-2xl max-sm:text-lg">{title ? title : "Popular on Netflix"}</h2>
+            <div
+                className="flex gap-2.5 max-sm:gap-2 overflow-x-scroll [&::-webkit-scrollbar]:hidden
+             "
+                ref={cardsRef}
+            >
                 {apiData.map((card, index) => (
                     <Link
                         to={`/player/${card.id}`}
                         key={index}
-                        className="shrink-0 relative cursor-pointer transition-transform hover:scale-105 duration-200"
+                        className="shrink-0 max-sm:w-35 relative cursor-pointer transition-transform hover:scale-105 duration-200"
                     >
                         <img
                             src={
@@ -59,7 +63,7 @@ export default function TitleCards({ title, category = "popular" }) {
                             alt={card.original_title}
                             className="w-60 rounded-sm"
                         />
-                        <p className="absolute bottom-2.5 right-2.5 ">{card.original_title}</p>
+                        <p className="absolute bottom-2.5 right-2.5 max-sm:text-xs ">{card.original_title}</p>
                     </Link>
                 ))}
             </div>

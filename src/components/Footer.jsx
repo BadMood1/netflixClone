@@ -6,7 +6,7 @@ import facebookIcon from "../assets/facebook_icon.png";
 
 const Footer = () => {
     return (
-        <div className="p-[30px_4%] max-w-[1000px] mx-auto">
+        <div className="p-[30px_4%] max-sm:p-[15px_4%] max-w-[1000px] mx-auto">
             <div className="flex gap-5 my-10 [&_img]:w-7.5 cursor-pointer [&_img]:hover:scale-110 [&_img]:transition-transform [&_img]:duration-200">
                 <img src={facebookIcon} alt="" />
                 <img src={instagramIcon} alt="" />
@@ -16,6 +16,7 @@ const Footer = () => {
             <ul
                 className="grid grid-cols-4 gap-3 mb-10 [&_span]:hover:border-b-2   [&_span]:pb-1 [&_span]:cursor-pointer text-gray-400
                 [&_span]:hover:text-[#e50914] [&_span]:transition-colors [&_span]:duration-200
+                [&_li]:text-sm max-sm:grid-cols-2
             "
             >
                 <li>

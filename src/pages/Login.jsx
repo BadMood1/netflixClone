@@ -2,27 +2,35 @@ import React from "react";
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import { signUp, login } from "../firebase";
+import netflixSpinner from "../assets/netflix_spinner.gif";
 
 export default function Login() {
     const [isNewUser, setIsNewUser] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const user_auth = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if (isNewUser) {
             await signUp(name, email, password);
         } else {
             await login(email, password);
         }
+        setLoading(false);
     };
 
-    return (
+    return loading ? (
+        <div className="w-full h-screen flex items-center justify-center">
+            <img src={netflixSpinner} alt="" className="w-15" />
+        </div>
+    ) : (
         <div className="h-screen bg-[url('./assets/background_banner.jpg')]">
             <div className="absolute inset-0 bg-linear-to-b from-black/50 to-black/50">
-                <img src={logo} className="w-[150px] mt-8 ml-20" />
-                <div className="w-full max-w-[450px] bg-[rgba(0,0,0,0.75)] rounded-lg p-15 mx-auto">
+                <img src={logo} className="w-[150px] mt-8 ml-20 max-sm:hidden" />
+                <div className="w-full sm:max-w-[450px] max-sm:h-screen bg-[rgba(0,0,0,0.75)] rounded-lg max-sm:p-10 sm:p-15 mx-auto">
                     <h1 className="text-3xl font-semibold mb-7">{isNewUser ? "Sign Up" : "Sign In"}</h1>
                     <form
                         action=""

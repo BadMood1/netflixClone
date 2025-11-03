@@ -32,8 +32,7 @@ const signUp = async (name, email, password) => {
         });
     } catch (error) {
         console.log(error.code);
-        toast.error(error.code);
-        toast("test");
+        toast.error(error.code.split("/")[1].replaceAll("-", " "));
     }
 };
 
@@ -43,7 +42,7 @@ const login = async (email, password) => {
     } catch (error) {
         console.log("ОШИБКА");
         console.log(error.code);
-        toast.error(error.code);
+        toast.error(error.code.split("/")[1].replaceAll("-", " "));
     }
 };
 

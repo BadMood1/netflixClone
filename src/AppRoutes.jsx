@@ -21,7 +21,7 @@ function AppRoutes() {
                 navigate("/login");
             }
         });
-    }, [navigate]);
+    }, []);
 
     return (
         <>

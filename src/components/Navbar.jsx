@@ -10,25 +10,31 @@ export default function Navbar() {
     const navRef = useRef();
 
     useEffect(() => {
-        window.addEventListener("scroll", () => {
+        const handleScroll = () => {
             if (window.scrollY >= 80) {
                 navRef.current.classList.add("bg-[#141414]");
             } else {
-                navRef.current.classList.remove("bg-[#141414]");
+                navRef.current?.classList.remove("bg-[#141414]");
             }
-        });
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
     return (
         <div
             ref={navRef}
-            className="flex p-[20px_6%] justify-between text-[#e5e5e5] text-[14px] 
+            className="flex lg:p-[20px_6%] max-lg:p-[15px_4%] justify-between text-[#e5e5e5] text-[14px] 
             gradient-overlay z-1 fixed w-full transition-bg duration-200"
         >
             <div className="flex items-center gap-[50px]">
                 <img src={logo} alt="LOGO" className="w-[90px] " />
                 <ul
-                    className="flex list-none gap-5 [&_li]:cursor-pointer [&_li:hover]:text-[#e50914] [&_li]:transition-colors duration-75
-                "
+                    className="flex list-none gap-4 [&_li]:cursor-pointer [&_li:hover]:text-[#e50914] [&_li]:transition-colors duration-75
+                max-lg:hidden"
                 >
                     <li>Home</li>
                     <li>TV Shows</li>

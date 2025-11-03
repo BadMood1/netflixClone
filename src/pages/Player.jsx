@@ -42,7 +42,7 @@ export default function Player() {
                 width={"85%"}
                 height={"90%"}
                 title="Trailer"
-                frameborder="0"
+                frameBorder="0"
                 allowFullScreen
                 className="rounded-2xl border-2 border-white/30 py-1"
             ></iframe>
